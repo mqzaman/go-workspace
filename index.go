@@ -19,4 +19,5 @@ func main() {
 	fmt.Println(m)
 	modify(m)
 	fmt.Println(m)
+	fmt.Println(&m)
 }
