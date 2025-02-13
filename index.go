@@ -22,7 +22,7 @@ type Cat struct {
 }
 
 func (c Cat) Walk() {
-	fmt.Printf("This cat name is %s and age is %d", d.name, d.age)
+	fmt.Printf("This cat name is %s and age is %d", c.name, c.age)
 }
 func MakeWalk(w Walker) {
 	w.Walk()
