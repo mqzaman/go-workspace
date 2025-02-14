@@ -34,6 +34,8 @@ func PrintType(i interface{}) {
 		fmt.Println("Integer")
 	case string:
 		fmt.Println("String")
+	case float32:
+		fmt.Println("Float")
 	default:
 		fmt.Println("Others Type")
 	}
