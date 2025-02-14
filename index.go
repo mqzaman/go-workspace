@@ -2,51 +2,29 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
-type Walker interface {
-	Walk()
+func Server1(ch chan string) {
+	time.Sleep(4 * time.Second)
+	ch <- "From Server1"
+}
+func Server2(ch chan string) {
+	time.Sleep(2 * time.Second)
+	ch <- "From Server2"
 }
 
-type Dog struct {
-	name string
-	age  int
-}
-
-func (d Dog) Walk() {
-	fmt.Printf("This dog name is %s and age is %d", d.name, d.age)
-}
-
-type Cat struct {
-	name string
-	age  int
-}
-
-func (c Cat) Walk() {
-	fmt.Printf("This cat name is %s and age is %d", c.name, c.age)
-}
-func MakeWalk(w Walker) {
-	w.Walk()
-}
-func PrintType(i interface{}) {
-	switch i.(type) {
-	case int:
-		fmt.Println("Integer")
-	case string:
-		fmt.Println("String")
-	case float32:
-		fmt.Println("Float")
-	default:
-		fmt.Println("Others Type")
-	}
-}
 func main() {
-	dog := Dog{name: "Rex", age: 2}
-	MakeWalk(dog)
-	cat := Cat{name: "Tix", age: 3}
-	MakeWalk(cat)
-	PrintType(5)
-	PrintType("Hello")
-	PrintType(true)
-	PrintType(1.3)
+	output1 := make(chan string)
+	output2 := make(chan string)
+	go Server1(output1)
+	go Server2(output2)
+
+	select {
+	case s1 := <-output1:
+		fmt.Println(s1)
+	case s2 := <-output2:
+		fmt.Println(s2)
+
+	}
 }
