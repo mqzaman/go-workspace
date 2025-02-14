@@ -7,8 +7,7 @@ import (
 type Walker interface {
 	Walk()
 }
-type I interface {
-}
+
 type Dog struct {
 	name string
 	age  int
@@ -29,7 +28,7 @@ func (c Cat) Walk() {
 func MakeWalk(w Walker) {
 	w.Walk()
 }
-func PrintType(i I) {
+func PrintType(i interface{}) {
 	switch i.(type) {
 	case int:
 		fmt.Println("Integer")
@@ -47,4 +46,5 @@ func main() {
 	PrintType(5)
 	PrintType("Hello")
 	PrintType(true)
+	PrintType(1.3)
 }
